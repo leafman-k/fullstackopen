@@ -1,0 +1,22 @@
+title 0.5 SPA
+
+note left of Selain:
+Selain pyytää html dokumentin palvelimelta.
+end note
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/spa
+Palvelin->Selain: document
+Note left of Selain:
+Selain lataa html sivulla esitellyt js ja
+css tiedostot palvelimelta.
+end note
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+Palvelin->Selain: HTTP 200 / main.css
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.js
+Palvelin->Selain: HTTP 200 / main.js
+Note left of Selain:
+Selain suorittaa ladatun osan javascript koodista mikä noutaa
+json muotoisen datan palvelimelta ja vastauksen saatuaan
+muotoilee sen html sivulle
+end note
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+Palvelin->Selain: data.json

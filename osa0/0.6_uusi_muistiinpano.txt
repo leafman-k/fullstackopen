@@ -1,0 +1,17 @@
+Title 0.6 Uusi muistiinpano
+
+note left of Selain
+Selain lähettää asynkronisen
+päivityssanoman palvelimelle
+end note
+Selain->Palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note right of Palvelin
+Palvelin käsittelee pyynnön ja
+vastaa json muotoisella datalla
+ja status koodilla 201(created)
+end note
+Palvelin->Selain: HTTP 201 / json
+note left of Selain
+Javascript käsittelee palvelimen vastauksen
+ja lisää käyttäjän syötteen listalle.

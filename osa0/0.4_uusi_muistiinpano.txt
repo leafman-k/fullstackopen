@@ -1,0 +1,30 @@
+title 0.4 Uusi muistiinpano
+
+Selain->Palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note
+note right of Palvelin:
+Palvelin tallentaa muistiinpanon
+ja vastaa HTTP status koodilla 302 (uudelleen ohjaus)
+ja otsikkotieto location sisältää kohteen
+end note
+Palvelin->Selain: HTTP 302
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/notes
+Palvelin->Selain: html
+Note left of Selain:
+Selain lataa html sivulla esitellyt js ja
+css tiedostot palvelimelta.
+end note
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+note right of Palvelin:
+Onnistunut haku palauttaa HTTP status koodin 200
+haetun sisällön lisäksi.
+end note
+Palvelin->Selain: main.css
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.js
+Palvelin->Selain: main.js
+Note left of Selain:
+Selain suorittaa ladatun javascript koodin mikä noutaa
+json muotoisen datan palvelimelta ja vastauksen saatuaan
+muotoilee sen html sivulle
+end note
+Selain->Palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+Palvelin->Selain: data.json
