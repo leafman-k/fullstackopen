@@ -2,7 +2,7 @@ const _ = require('lodash')
 
 
 const dummy = (blogs) => {
-  return 1
+  return blogs.length
 }
 
 const totalLikes = (blogs) => {
@@ -10,14 +10,14 @@ const totalLikes = (blogs) => {
     return sum + item.likes
   }
   return blogs.length === 0
-      ? 0
-      : blogs.reduce(reducer, 0)
+    ? 0
+    : blogs.reduce(reducer, 0)
 
 }
-const favoriteBlog = (blogs) =>{
+const favoriteBlog = (blogs) => {
 
   if(blogs.length === 0){
-    return {title: 'Empty list, no favorites'}
+    return { title: 'Empty list, no favorites' }
   }
 
   const max = blogs.reduce(function(prev, current) {
@@ -31,38 +31,38 @@ const favoriteBlog = (blogs) =>{
   }
 
 }
-const mostBlogs = (blogs) =>{
+const mostBlogs = (blogs) => {
 
   if(blogs.length === 0){
-    return {author: 'Empty list', blogs: 0}
+    return { author: 'Empty list', blogs: 0 }
   }
 
 
- let result = _(blogs)
-     .countBy('author')
-     .map((key, value) =>({
-       author: value,
-       blogs: key
-     }))
-     .maxBy('blogs')
+  let result = _(blogs)
+    .countBy('author')
+    .map((key, value) => ({
+      author: value,
+      blogs: key
+    }))
+    .maxBy('blogs')
 
   console.log('Most Blogs', result)
 
   return result
 }
-const mostLikes = (blogs) =>{
+const mostLikes = (blogs) => {
 
   if(blogs.length === 0){
-    return {author: 'Empty list', likes: 0}
+    return { author: 'Empty list', likes: 0 }
   }
 
   let result = _(blogs)
-      .groupBy('author')
-      .map((blog ,id)=>({
-        author: id,
-        likes: _.sumBy(blog, 'likes')
-      }))
-      .maxBy('likes')
+    .groupBy('author')
+    .map((blog ,id) => ({
+      author: id,
+      likes: _.sumBy(blog, 'likes')
+    }))
+    .maxBy('likes')
 
   console.log('Most likes', result)
   return result
