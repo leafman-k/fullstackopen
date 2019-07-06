@@ -23,11 +23,13 @@ test('notes are returned as json', async () => {
 
 test('there are two notes', async () => {
   const response = await api.get('/api/blogs')
-
   expect(response.body.length).toBe(2)
 })
 
-
+test('id is properly formatted', async () => {
+  const response = await api.get('/api/blogs')
+  expect(response.body[0].id).toBeDefined()
+})
 afterAll(() => {
   mongoose.connection.close()
 })
