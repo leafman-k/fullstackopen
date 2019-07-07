@@ -82,6 +82,24 @@ test('Bad request response when title or url are missing', async () => {
     .send(newBlog)
     .expect(400)
 })
+
+describe('deletion of a blog entry', () => {
+  test('response status code 204 when valid entry is removed', async () => {
+
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDb()
+
+    const blogs = blogsAtEnd.map(blog => blog.id)
+
+    expect(blogs).not.toContain(blogToDelete.id)
+  })
+})
 afterAll(() => {
   mongoose.connection.close()
 })
