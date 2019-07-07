@@ -36,7 +36,7 @@ test('a valid blog can be added ', async () => {
     title: 'Continuous learning',
     author: 'Anonymous',
     url: 'https://continuouslearning.com/',
-    likes: 0,
+    likes: 0
   }
 
   await api
@@ -53,6 +53,23 @@ test('a valid blog can be added ', async () => {
   expect(titles).toContain(
     'Continuous learning'
   )
+})
+
+test('default value 0 is added to likes attribute', async () => {
+  const newBlog = {
+    title: 'Continuous improving',
+    author: 'Anonymous',
+    url: 'https://continuousimproving.com/'
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const likes = response.body.likes
+  expect(likes).toBe(0)
 })
 
 afterAll(() => {
