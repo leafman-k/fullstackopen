@@ -100,6 +100,25 @@ describe('deletion of a blog entry', () => {
     expect(blogs).not.toContain(blogToDelete.id)
   })
 })
+describe('update of a blog entry', () => {
+  test('response status code 200 when valid blog is updated', async () => {
+
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToUpdate = blogsAtStart[0]
+    const blog ={
+      likes: 100
+    }
+
+    const updatedBlog = await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blog)
+      .expect(200)
+
+    const blogsAtEnd = await helper.blogsInDb()
+
+    expect(updatedBlog.body.likes).toBe(blogsAtEnd[0].likes)
+  })
+})
 afterAll(() => {
   mongoose.connection.close()
 })
