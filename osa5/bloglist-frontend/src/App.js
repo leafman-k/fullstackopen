@@ -10,6 +10,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [blogs, setBlogs] = useState([])
+
   useEffect(() => {
     blogService
         .getAll()
@@ -17,6 +18,15 @@ function App() {
           setBlogs(blogsInDB)
         })
   }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+    }
+  }, [])
+
   const loginForm = () => (
       <form onSubmit={handleLogin}>
         <div>
@@ -47,7 +57,9 @@ function App() {
       const user = await loginService.login({
         username, password
       })
-
+      window.localStorage.setItem(
+          'loggedUser', JSON.stringify(user)
+      )
       setUser(user)
       setUsername('')
       setPassword('')
@@ -59,13 +71,25 @@ function App() {
       }, 5000)
     }
   }
+  const handleLogout = () => {
+
+
+      window.localStorage.removeItem(
+          'loggedUser'
+      )
+      setUser(null)
+  }
   return (
     <div>
       <Notification message={errorMessage}/>
       {user === null ?
           loginForm() :
           <div>
-            <p>{user.name} logged in</p>
+            <p>{user.name} logged in
+              <button onClick={() => handleLogout()}>
+                logout
+              </button>
+            </p>
             <div>
               <h2>blogs</h2>
               {blogs.map(blog =>
