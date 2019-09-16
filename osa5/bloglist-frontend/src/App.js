@@ -4,7 +4,7 @@ import loginService from './services/login'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
 import BlogForm from './components/BlogForm'
-
+import Togglable from './components/Togglable'
 function App() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -131,13 +131,15 @@ function App() {
                 logout
               </button>
             </p>
-            <BlogForm addBlog={addBlog}
-                      title={title}
-                      author={author}
-                      url={url}
-                      handleTitleChange={handleTitleChange}
-                      handleAuthorChange={handleAuthorChange}
-                      handleUrlChange={handleUrlChange}/>
+            <Togglable buttonLabel='new blog'>
+              <BlogForm addBlog={addBlog}
+                        title={title}
+                        author={author}
+                        url={url}
+                        handleTitleChange={handleTitleChange}
+                        handleAuthorChange={handleAuthorChange}
+                        handleUrlChange={handleUrlChange}/>
+            </Togglable>
             <div>
               <h2>blogs</h2>
               {blogs.map(blog =>
