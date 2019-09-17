@@ -172,7 +172,7 @@ function App() {
             <div>
               <h2>blogs</h2>
               {blogs.map(blog =>
-                  <Blog key={blog.id} blog={blog} likes={()=>likeBlog(blog.id)} remove={()=>removeBlog(blog.id)}/>
+                  <Blog key={blog.id} blog={blog} likes={()=>likeBlog(blog.id)} remove={()=>removeBlog(blog.id)} user={user}/>
               )}
             </div>
           </div>
