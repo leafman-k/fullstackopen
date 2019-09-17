@@ -19,7 +19,7 @@ function App() {
     blogService
         .getAll()
         .then(blogsInDB => {
-          setBlogs(blogsInDB)
+          setBlogs(blogsInDB.sort((a, b) => (a.likes > b.likes) ? -1: 1))
         })
   }, [])
 
@@ -84,7 +84,7 @@ function App() {
       const addedBlog = await blogService.addBlog({
         title, author, url
       })
-      setBlogs(blogs.concat(addedBlog))
+      setBlogs(blogs.concat(addedBlog).sort((a, b) => (a.likes > b.likes) ? -1: 1))
       setMessage(
           {text: `A new blog ${addedBlog.title} by ${addedBlog.author} added`, type: 'info'}
       )
@@ -109,7 +109,7 @@ function App() {
         likes: likes,
         user: blog.user.id}
     const updatedBlog = await blogService.likeBlog(id, changedBlog)
-    setBlogs(blogs.map(blog => blog.id !== id ? blog : updatedBlog))
+    setBlogs(blogs.map(blog => blog.id !== id ? blog : updatedBlog).sort((a, b) => (a.likes > b.likes) ? -1: 1))
   }
   const handleLogout = () => {
       window.localStorage.removeItem(
