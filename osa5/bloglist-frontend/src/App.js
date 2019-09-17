@@ -94,10 +94,11 @@ function App() {
 
     } catch (exception) {
       setMessage({text:'Ooops, Something went wrong', type:'error'})
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
+
     }
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
   }
   const handleLogout = () => {
       window.localStorage.removeItem(
