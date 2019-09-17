@@ -100,6 +100,17 @@ function App() {
       setMessage(null)
     }, 5000)
   }
+  const likeBlog = async (id) => {
+    const blog = blogs.find(blog => blog.id === id)
+    const likes = ++blog.likes
+    const changedBlog = {title: blog.title,
+        author: blog.author,
+        url: blog.url,
+        likes: likes,
+        user: blog.user.id}
+    const updatedBlog = await blogService.likeBlog(id, changedBlog)
+    setBlogs(blogs.map(blog => blog.id !== id ? blog : updatedBlog))
+  }
   const handleLogout = () => {
       window.localStorage.removeItem(
           'loggedUser'
@@ -144,7 +155,7 @@ function App() {
             <div>
               <h2>blogs</h2>
               {blogs.map(blog =>
-                  <Blog key={blog.id} blog={blog} />
+                  <Blog key={blog.id} blog={blog} likes={()=>likeBlog(blog.id)}/>
               )}
             </div>
           </div>
