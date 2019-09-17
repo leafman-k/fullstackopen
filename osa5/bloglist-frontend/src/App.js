@@ -111,6 +111,23 @@ function App() {
     const updatedBlog = await blogService.likeBlog(id, changedBlog)
     setBlogs(blogs.map(blog => blog.id !== id ? blog : updatedBlog).sort((a, b) => (a.likes > b.likes) ? -1: 1))
   }
+
+  const removeBlog = async (id) =>{
+    const removedBlog = blogs.find(blog => blog.id === id)
+    if(window.confirm(`remove blog ${removedBlog.title} by ${removedBlog.author}`)) {
+      try {
+        await blogService.removeBlog(id)
+        setBlogs(blogs.filter(blog => blog.id !== id))
+
+      } catch (exception) {
+        setMessage({text: exception.response.data.error, type: 'error'})
+
+      }
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    }
+  }
   const handleLogout = () => {
       window.localStorage.removeItem(
           'loggedUser'
@@ -155,7 +172,7 @@ function App() {
             <div>
               <h2>blogs</h2>
               {blogs.map(blog =>
-                  <Blog key={blog.id} blog={blog} likes={()=>likeBlog(blog.id)}/>
+                  <Blog key={blog.id} blog={blog} likes={()=>likeBlog(blog.id)} remove={()=>removeBlog(blog.id)}/>
               )}
             </div>
           </div>
