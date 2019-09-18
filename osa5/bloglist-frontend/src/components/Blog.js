@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Blog = ({blog, likes, remove, user}) => {
+const Blog = ({ blog, likes, remove, user }) => {
 
   const [visible, setVisible] = useState(false)
 
-  const showWhenVisible = {display: visible ? '' : 'none'}
+  const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
     setVisible(!visible)
@@ -20,20 +20,20 @@ const Blog = ({blog, likes, remove, user}) => {
   }
 
   return (
-      <div style={blogStyle}>
-        <div onClick={ toggleVisibility }>
-          {blog.title} {blog.author}
-        </div>
-        <div style={showWhenVisible}>
-          {blog.likes} likes <button onClick={likes}>like</button>
-          <br/>
-          added by {blog.user.name}
-          <br/>
-          {user.username === blog.user.username ?
-            <button onClick={remove}>remove</button>
-              : ''}
-        </div>
+    <div style={blogStyle}>
+      <div onClick={ toggleVisibility }>
+        {blog.title} {blog.author}
       </div>
+      <div style={showWhenVisible}>
+        {blog.likes} likes <button onClick={likes}>like</button>
+        <br/>
+          added by {blog.user.name}
+        <br/>
+        {user.username === blog.user.username ?
+          <button onClick={remove}>remove</button>
+          : ''}
+      </div>
+    </div>
   )
 }
 Blog.propTypes = {

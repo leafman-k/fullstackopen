@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import loginService from './services/login'
 import blogService from './services/blogs'
@@ -17,10 +17,10 @@ function App() {
 
   useEffect(() => {
     blogService
-        .getAll()
-        .then(blogsInDB => {
-          setBlogs(blogsInDB.sort((a, b) => (a.likes > b.likes) ? -1: 1))
-        })
+      .getAll()
+      .then(blogsInDB => {
+        setBlogs(blogsInDB.sort((a, b) => (a.likes > b.likes) ? -1: 1))
+      })
   }, [])
 
   useEffect(() => {
@@ -34,27 +34,27 @@ function App() {
   }, [])
 
   const loginForm = () => (
-      <form onSubmit={handleLogin}>
-        <div>
+    <form onSubmit={handleLogin}>
+      <div>
           username
-          <input
-              type="text"
-              value={username}
-              name="Username"
-              onChange={({target}) => setUsername(target.value)}
-          />
-        </div>
-        <div>
+        <input
+          type="text"
+          value={username}
+          name="Username"
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
           password
-          <input
-              type="password"
-              value={password}
-              name="Password"
-              onChange={({target}) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
+        <input
+          type="password"
+          value={password}
+          name="Password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type="submit">login</button>
+    </form>
   )
 
   const handleLogin = async (event) => {
@@ -64,7 +64,7 @@ function App() {
         username, password
       })
       window.localStorage.setItem(
-          'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
       setUser(user)
@@ -72,7 +72,7 @@ function App() {
       setPassword('')
 
     } catch (exception) {
-      setMessage({text:'wrong credentials', type:'error'})
+      setMessage({ text:'wrong credentials', type:'error' })
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -86,14 +86,14 @@ function App() {
       })
       setBlogs(blogs.concat(addedBlog).sort((a, b) => (a.likes > b.likes) ? -1: 1))
       setMessage(
-          {text: `A new blog ${addedBlog.title} by ${addedBlog.author} added`, type: 'info'}
+        { text: `A new blog ${addedBlog.title} by ${addedBlog.author} added`, type: 'info' }
       )
       setTitle('')
       setAuthor('')
       setUrl('')
 
     } catch (exception) {
-      setMessage({text:'Ooops, Something went wrong', type:'error'})
+      setMessage({ text:'Ooops, Something went wrong', type:'error' })
 
     }
     setTimeout(() => {
@@ -103,16 +103,16 @@ function App() {
   const likeBlog = async (id) => {
     const blog = blogs.find(blog => blog.id === id)
     const likes = ++blog.likes
-    const changedBlog = {title: blog.title,
-        author: blog.author,
-        url: blog.url,
-        likes: likes,
-        user: blog.user.id}
+    const changedBlog = { title: blog.title,
+      author: blog.author,
+      url: blog.url,
+      likes: likes,
+      user: blog.user.id }
     const updatedBlog = await blogService.likeBlog(id, changedBlog)
     setBlogs(blogs.map(blog => blog.id !== id ? blog : updatedBlog).sort((a, b) => (a.likes > b.likes) ? -1: 1))
   }
 
-  const removeBlog = async (id) =>{
+  const removeBlog = async (id) => {
     const removedBlog = blogs.find(blog => blog.id === id)
     if(window.confirm(`remove blog ${removedBlog.title} by ${removedBlog.author}`)) {
       try {
@@ -120,7 +120,7 @@ function App() {
         setBlogs(blogs.filter(blog => blog.id !== id))
 
       } catch (exception) {
-        setMessage({text: exception.response.data.error, type: 'error'})
+        setMessage({ text: exception.response.data.error, type: 'error' })
 
       }
       setTimeout(() => {
@@ -129,10 +129,10 @@ function App() {
     }
   }
   const handleLogout = () => {
-      window.localStorage.removeItem(
-          'loggedUser'
-      )
-      setUser(null)
+    window.localStorage.removeItem(
+      'loggedUser'
+    )
+    setUser(null)
   }
 
 
@@ -153,32 +153,32 @@ function App() {
     <div>
       <Notification message={message}/>
       {user === null ?
-          loginForm() :
-          <div>
-            <p>{user.name} logged in
-              <button onClick={() => handleLogout()}>
+        loginForm() :
+        <div>
+          <p>{user.name} logged in
+            <button onClick={() => handleLogout()}>
                 logout
-              </button>
-            </p>
-            <Togglable buttonLabel='new blog'>
-              <BlogForm addBlog={addBlog}
-                        title={title}
-                        author={author}
-                        url={url}
-                        handleTitleChange={handleTitleChange}
-                        handleAuthorChange={handleAuthorChange}
-                        handleUrlChange={handleUrlChange}/>
-            </Togglable>
-            <div>
-              <h2>blogs</h2>
-              {blogs.map(blog =>
-                  <Blog key={blog.id} blog={blog} likes={()=>likeBlog(blog.id)} remove={()=>removeBlog(blog.id)} user={user}/>
-              )}
-            </div>
+            </button>
+          </p>
+          <Togglable buttonLabel='new blog'>
+            <BlogForm addBlog={addBlog}
+              title={title}
+              author={author}
+              url={url}
+              handleTitleChange={handleTitleChange}
+              handleAuthorChange={handleAuthorChange}
+              handleUrlChange={handleUrlChange}/>
+          </Togglable>
+          <div>
+            <h2>blogs</h2>
+            {blogs.map(blog =>
+              <Blog key={blog.id} blog={blog} likes={() => likeBlog(blog.id)} remove={() => removeBlog(blog.id)} user={user}/>
+            )}
           </div>
+        </div>
       }
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
