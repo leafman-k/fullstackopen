@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, fireEvent } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'
 import SimpleBlog from './SimpleBlog'
 
@@ -30,4 +30,19 @@ describe('<SimbleBlog/>', () => {
     )
   })
 
+  test('clicking the likes button twice calls event handler twice', async () => {
+
+    const mockHandler = jest.fn()
+
+    const { getByText } = render(
+      <SimpleBlog blog={blog} onClick={mockHandler} />
+    )
+
+    const button = getByText('like')
+
+    fireEvent.click(button)
+    fireEvent.click(button)
+
+    expect(mockHandler.mock.calls.length).toBe(2)
+  })
 })
