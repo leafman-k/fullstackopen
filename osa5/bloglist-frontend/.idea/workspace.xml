@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0192691-5862-4088-b432-7e6319e99ba7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/__mocks__/blogs.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa1/anekdootit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa1/anekdootit/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa1/unicafe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa1/unicafe/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa2/maat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa2/maat/.idea/workspace.xml" afterDir="false" />
@@ -13,9 +12,8 @@
       <change beforePath="$PROJECT_DIR$/../../osa2/puhelinluettelo/src/services/persons.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa2/puhelinluettelo/src/services/persons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa4/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa4/controllers/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Blog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/__mocks__/blogs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/__mocks__/blogs.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+            <state relative-caret-position="439">
+              <caret line="42" column="2" lean-forward="true" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="2" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -54,10 +52,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/setupTests.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="74" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/services/__mocks__/blogs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+            <state relative-caret-position="394">
+              <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -65,11 +72,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="176" column="12" selection-start-line="176" selection-start-column="12" selection-end-line="176" selection-end-column="12" />
+            <state relative-caret-position="1980">
+              <caret line="132" column="17" selection-start-line="132" selection-start-column="7" selection-end-line="132" selection-end-column="17" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/blogs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="25" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -106,8 +122,9 @@
         <option value="$PROJECT_DIR$/src/components/SimpleBlog.test.js" />
         <option value="$PROJECT_DIR$/src/components/Blog.test.js" />
         <option value="$PROJECT_DIR$/src/components/Blog.js" />
-        <option value="$PROJECT_DIR$/src/services/__mocks__/blogs.js" />
+        <option value="$PROJECT_DIR$/src/setupTests.js" />
         <option value="$PROJECT_DIR$/src/App.test.js" />
+        <option value="$PROJECT_DIR$/src/services/__mocks__/blogs.js" />
       </list>
     </option>
   </component>
@@ -149,13 +166,14 @@
               <item name="bloglist-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="bloglist-frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="bloglist-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="bloglist-frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="__mocks__" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -207,18 +225,18 @@
       <updated>1565711448793</updated>
       <workItem from="1565711453178" duration="10574000" />
       <workItem from="1568652396871" duration="11328000" />
-      <workItem from="1569342310597" duration="6387000" />
+      <workItem from="1569342310597" duration="7266000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28289000" />
+    <option name="totallyTimeSpent" value="29168000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="190" y="63" width="1400" height="933" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2569956" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2569956" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -234,7 +252,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32936978" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32936978" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
@@ -296,13 +314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/blogs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -358,23 +369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="176" column="12" selection-start-line="176" selection-start-column="12" selection-end-line="176" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/__mocks__/blogs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -392,13 +386,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/setupTests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="74" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+        <state relative-caret-position="439">
+          <caret line="42" column="2" lean-forward="true" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="2" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="132" column="17" selection-start-line="132" selection-start-column="7" selection-end-line="132" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/blogs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/__mocks__/blogs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
         </state>
       </provider>
     </entry>

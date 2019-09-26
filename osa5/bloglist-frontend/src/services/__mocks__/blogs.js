@@ -28,5 +28,7 @@ const blogs = [
 const getAll = () => {
   return Promise.resolve(blogs)
 }
-
-export default { getAll }
+const setToken = newToken => {
+  console.log('Token: ', newToken)
+}
+export default { getAll , setToken }
