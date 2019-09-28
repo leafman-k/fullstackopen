@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0192691-5862-4088-b432-7e6319e99ba7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/hooks/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa1/anekdootit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa1/anekdootit/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa1/unicafe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa1/unicafe/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../osa2/maat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa2/maat/.idea/workspace.xml" afterDir="false" />
@@ -13,6 +12,7 @@
       <change beforePath="$PROJECT_DIR$/../../osa4/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../osa4/controllers/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +89,7 @@
       <workItem from="1568652396871" duration="11328000" />
       <workItem from="1569342310597" duration="7558000" />
       <workItem from="1569607388959" duration="599000" />
-      <workItem from="1569648785088" duration="1977000" />
+      <workItem from="1569648785088" duration="3701000" />
     </task>
     <servers />
   </component>

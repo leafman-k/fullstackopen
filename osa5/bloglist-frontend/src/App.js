@@ -14,9 +14,9 @@ function App() {
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   const [blogs, setBlogs] = useState([])
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
 
   useEffect(() => {
     blogService
@@ -62,6 +62,7 @@ function App() {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+
     try {
       const user = await loginService.login(
         { username: username.value, password: password.value }
@@ -71,8 +72,8 @@ function App() {
       )
       blogService.setToken(user.token)
       setUser(user)
-      username.value= ''
-      password.value = ''
+      username.reset()
+      password.reset()
 
     } catch (exception) {
       setMessage({ text:'wrong credentials', type:'error' })
@@ -85,15 +86,15 @@ function App() {
     event.preventDefault()
     try {
       const addedBlog = await blogService.addBlog({
-        title, author, url
+        title: title.value, author:author.value, url: url.value
       })
       setBlogs(blogs.concat(addedBlog).sort((a, b) => (a.likes > b.likes) ? -1: 1))
       setMessage(
         { text: `A new blog ${addedBlog.title} by ${addedBlog.author} added`, type: 'info' }
       )
-      setTitle('')
-      setAuthor('')
-      setUrl('')
+      title.reset()
+      author.reset()
+      url.reset()
 
     } catch (exception) {
       setMessage({ text:'Ooops, Something went wrong', type:'error' })
@@ -138,20 +139,6 @@ function App() {
     setUser(null)
   }
 
-
-  const handleTitleChange = (event) => {
-    console.log(event.target.value)
-    setTitle(event.target.value)
-  }
-
-  const handleAuthorChange = (event) => {
-    console.log(event.target.value)
-    setAuthor(event.target.value)
-  }
-  const handleUrlChange = (event) => {
-    console.log(event.target.value)
-    setUrl(event.target.value)
-  }
   return (
     <div>
       <Notification message={message}/>
@@ -165,12 +152,12 @@ function App() {
           </p>
           <Togglable buttonLabel='new blog'>
             <BlogForm addBlog={addBlog}
-              title={title}
-              author={author}
-              url={url}
-              handleTitleChange={handleTitleChange}
-              handleAuthorChange={handleAuthorChange}
-              handleUrlChange={handleUrlChange}/>
+              title={title.value}
+              author={author.value}
+              url={url.value}
+              handleTitleChange={title.onChange}
+              handleAuthorChange={author.onChange}
+              handleUrlChange={url.onChange}/>
           </Togglable>
           <div>
             <h2>blogs</h2>
