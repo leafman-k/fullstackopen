@@ -5,9 +5,12 @@ import blogService from './services/blogs'
 import Notification from './components/Notification'
 import BlogForm from './components/BlogForm'
 import Togglable from './components/Togglable'
+import  { useField } from './hooks'
+
 function App() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+
+  const username = useField('text')
+  const password = useField('password')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   const [blogs, setBlogs] = useState([])
@@ -38,19 +41,19 @@ function App() {
       <div>
           username
         <input
-          type="text"
-          value={username}
+          type={username.type}
+          value={username.value}
           name="Username"
-          onChange={({ target }) => setUsername(target.value)}
+          onChange={username.onChange}
         />
       </div>
       <div>
           password
         <input
-          type="password"
-          value={password}
+          type={password.type}
+          value={password.value}
           name="Password"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={password.onChange}
         />
       </div>
       <button type="submit">login</button>
@@ -60,16 +63,16 @@ function App() {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
-        username, password
-      })
+      const user = await loginService.login(
+        { username: username.value, password: password.value }
+      )
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      username.value= ''
+      password.value = ''
 
     } catch (exception) {
       setMessage({ text:'wrong credentials', type:'error' })
