@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {
   BrowserRouter as Router,
-  Route, Link
+  Route, Link, Redirect, withRouter
 } from 'react-router-dom'
 
 const Menu = () => {
@@ -16,12 +16,22 @@ const Menu = () => {
       </div>
   )
 }
+const Anecdote = ({anecdote}) => (
+    <div>
+      <h2>{anecdote.content} by {anecdote.author}</h2>
+      <p>has {anecdote.votes} votes</p>
+      <p>for more info see {anecdote.info}</p>
+    </div>
+)
 
 const AnecdoteList = ({anecdotes}) => (
     <div>
       <h2>Anecdotes</h2>
       <ul>
-        {anecdotes.map(anecdote => <li key={anecdote.id}>{anecdote.content}</li>)}
+        {anecdotes.map(anecdote =>
+            <li key={anecdote.id}>
+              <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
+            </li>)}
       </ul>
     </div>
 )
@@ -137,13 +147,15 @@ const App = () => {
           <div>
             <Menu/>
             <Route exact path="/" render={() => <AnecdoteList anecdotes={anecdotes}/>}/>
+            <Route exact path="/anecdotes" render={() => <AnecdoteList anecdotes={anecdotes}/>}/>
             <Route exact path="/about" render={() => <About/>}/>
             <Route exact path="/create" render={() => <CreateNew addNew={addNew}/>}/>
+            <Route exact path="/anecdotes/:id" render={({ match }) => <Anecdote anecdote={anecdoteById(match.params.id)}/>}/>
           </div>
-        </Router>
-        <Footer/>
+          </Router>
+            <Footer/>
       </div>
-  )
+)
 }
 
 export default App;
