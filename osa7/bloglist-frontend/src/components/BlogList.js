@@ -19,7 +19,7 @@ const BlogList = (props) => {
       likes: likes,
       user: blog.user.id
     }
-    const updatedBlog = props.likeBlog(id, changedBlog)
+    props.likeBlog(id, changedBlog)
   }
 
   const removeBlog = async (id) => {

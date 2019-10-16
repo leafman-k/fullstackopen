@@ -1,37 +1,68 @@
 import React from 'react'
+import {useField} from '../hooks'
+import {connect} from "react-redux";
+import {setNotification} from "../reducers/notificationReducer";
+import {addBlog} from '../reducers/blogReducer'
+
 
 const BlogForm = (props) => {
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
+
+  const addBlog = async (event) => {
+    event.preventDefault()
+    try {
+      props.addBlog({
+        title: title.value, author: author.value, url: url.value
+      })
+      props.setNotification(
+          {content: `A new blog ${title.value} by ${author.value} added`, type: 'info'}
+      )
+      title.reset()
+      author.reset()
+      url.reset()
+
+    } catch (exception) {
+      props.setNotification({content: 'Ooops, Something went wrong', type: 'error'})
+
+    }
+
+  }
   return (
-    <form onSubmit={props.addBlog}>
+    <form onSubmit={addBlog}>
       <div>
           title:
         <input
           type="text"
-          value={props.title}
+          value={title.value}
           name="Title"
-          onChange={props.handleTitleChange}
+          onChange={title.onChange}
         />
       </div>
       <div>
           author:
         <input
           type="text"
-          value={props.author}
+          value={author.value}
           name="Author"
-          onChange={props.handleAuthorChange}
+          onChange={author.onChange}
         />
       </div>
       <div>
           url:
         <input
           type="text"
-          value={props.url}
+          value={url.value}
           name="Url"
-          onChange={props.handleUrlChange}
+          onChange={url.onChange}
         />
       </div>
       <button type="submit">Add new blog</button>
     </form>
   )
 }
-export default BlogForm
+const mapDispatchToProps = {
+  setNotification, addBlog
+}
+export default connect(null, mapDispatchToProps)(BlogForm)
