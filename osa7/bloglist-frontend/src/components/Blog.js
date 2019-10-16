@@ -27,11 +27,11 @@ const Blog = ({ blog, likes, remove, user }) => {
       <div style={showWhenVisible} className="togglableContent">
         {blog.likes} likes <button onClick={likes}>like</button>
         <br/>
+        {blog.url}
+        <br/>
           added by {blog.user.name}
         <br/>
-        {user.username === blog.user.username ?
-          <button onClick={remove}>remove</button>
-          : ''}
+
       </div>
     </div>
   )
