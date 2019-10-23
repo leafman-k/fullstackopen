@@ -8,16 +8,20 @@ import thunk from 'redux-thunk';
 import notificationReducer from './reducers/notificationReducer'
 import App from './App'
 import './index.css'
-import blogReducer from './reducers/blogReducer';
+import blogReducer from './reducers/blogReducer'
 import userReducer from './reducers/userReducer'
-
+import loginReducer from './reducers/loginReducer'
+import { composeWithDevTools } from 'redux-devtools-extension'
 const reducer = combineReducers({
   notification: notificationReducer,
   blogs: blogReducer,
-  user: userReducer
+  users: userReducer,
+  loginUser: loginReducer
 })
 
-const store = createStore(reducer,applyMiddleware(thunk))
+const store = createStore(reducer,composeWithDevTools(
+    applyMiddleware(thunk)
+))
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,20 +1,27 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
 import {setNotification} from "./reducers/notificationReducer";
-import BlogList from './components/BlogList'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
-import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 
-import Togglable from './components/Togglable'
 import {getAllBlogs} from "./reducers/blogReducer";
-import {setUser} from './reducers/userReducer'
+import {setUser} from './reducers/loginReducer'
+
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter
+} from 'react-router-dom'
+import UserList from "./components/UserList"
+import BlogList from "./components/BlogList"
+import User from './components/User'
+import Togglable from "./components/Togglable";
+import BlogForm from "./components/BlogForm";
 const App = (props) => {
 
   useEffect(() => {
     props.getAllBlogs()
-  },[])
+  }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -29,28 +36,44 @@ const App = (props) => {
 
   const handleLogout = () => {
     window.localStorage.removeItem(
-      'loggedUser'
+        'loggedUser'
     )
     props.setUser(null)
   }
+  const userById = (id) => {
+    console.log("user id: ", id)
+    return props.users.find(user => user.id === id)
+  }
 
   return (
-    <div>
-      <Notification/>
-      {props.user === null ? <LoginForm/> :
-        <div>
-          <p>{props.user.name} logged in
-            <button onClick={() => handleLogout()}>
-                logout
-            </button>
-          </p>
-          <Togglable buttonLabel='new blog'>
-            <BlogForm />
-          </Togglable>
-          <BlogList/>
-        </div>
-      }
-    </div>
+      <div>
+        <h2>Blogs</h2>
+        <Notification/>
+        {props.loggedUser !== null ?
+            <div>
+              <p>{props.loggedUser.name} logged in</p>
+                <button onClick={() => handleLogout()}>
+                  logout
+                </button>
+            </div>:<></>
+        }
+        <Router>
+          <div>
+            <Route exact path="/" render={() =>
+                <BlogList />
+            } />
+            <Route exact path="/users" render={() =>
+                props.loggedUser ? <UserList /> : <Redirect to="/login" />
+            } />
+            <Route exact path="/users/:id" render={({ match }) =>
+                <User user={userById(match.params.id)} />
+            } />
+            <Route path="/login" render={() =>
+                <LoginForm />
+            } />
+          </div>
+        </Router>
+      </div>
   )
 }
 
@@ -59,7 +82,8 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    loggedUser: state.loginUser,
+    users: state.users
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

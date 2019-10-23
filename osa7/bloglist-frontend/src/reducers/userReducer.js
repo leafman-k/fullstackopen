@@ -1,22 +1,23 @@
+import userService from '../services/users'
 
-const userReducer = (state = '', action) => {
+const userReducer = (state = [], action) => {
 
-  console.log('notification state now: ', state)
-  console.log('notificationReducer action', action)
+  console.log('users state now: ', state)
+  console.log('users action', action)
   switch(action.type){
-    case 'SET_USER':
+    case 'INIT_USERS':
       return action.data
     default:
       return state
   }
 }
-export const setUser = (user) => {
+export const getAllUsers = () => {
   return async dispatch => {
+    const users = await userService.getAllUsers()
     dispatch({
-      type: 'SET_USER',
-      data: user,
+      type: 'INIT_USERS',
+      data: users,
     })
   }
 }
-
 export default userReducer

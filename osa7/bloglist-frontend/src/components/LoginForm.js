@@ -4,9 +4,11 @@ import loginService from '../services/login'
 import blogService from '../services/blogs'
 import {useField} from '../hooks'
 import {setNotification} from '../reducers/notificationReducer'
-import {setUser} from '../reducers/userReducer'
+import {setUser} from '../reducers/loginReducer'
+import { withRouter } from 'react-router-dom'
 
-const LoginForm = (props) => {
+
+const LoginNoHistory = (props) => {
   const username = useField('text')
   const password = useField('password')
 
@@ -24,7 +26,7 @@ const LoginForm = (props) => {
       props.setUser(user)
       username.reset()
       password.reset()
-
+      props.history.push('/users')
     } catch (exception) {
       props.setNotification({ content:'wrong credentials', type:'error' })
     }
@@ -53,7 +55,8 @@ const LoginForm = (props) => {
       </form>
   )
 }
+const Login = withRouter(LoginNoHistory)
 const mapDispatchToProps = {
   setNotification, setUser
 }
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(Login)

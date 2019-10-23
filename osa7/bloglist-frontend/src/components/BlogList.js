@@ -37,21 +37,20 @@ const BlogList = (props) => {
 
   return (
       <div>
-        <h2>blogs</h2>
         {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} likes={() => likeBlog(blog.id)} remove={() => removeBlog(blog.id)}
-                  user={props.user}/>
+                  user={props.loginUser}/>
         )}
       </div>
   )
 }
 const mapDispatchToProps = {
-  setNotification, getAllBlogs, likeBlog, addBlog
+  setNotification, likeBlog, addBlog
 }
 const mapStateToProps = (state) => {
   return {
     blogs: state.blogs,
-    user: state.user
+    loginUser: state.loginUser
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(BlogList)
