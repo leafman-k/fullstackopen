@@ -1,48 +1,55 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
-const Blog = ({ blog, likes, remove, user }) => {
+import blogService from '../services/blogs'
+import {connect} from 'react-redux'
+import { likeBlog } from '../reducers/blogReducer'
 
-  const [visible, setVisible] = useState(false)
+const Blog = ( props ) => {
 
-  const showWhenVisible = { display: visible ? '' : 'none' }
+  const currentBlog = props.blog
+  const blogs = props.blogs
 
-  const toggleVisibility = () => {
-    setVisible(!visible)
+  const likeBlog = async (id) => {
+    const blog = blogs.find(blog => blog.id === id)
+    const likes = ++blog.likes
+    const changedBlog = {
+      title: blog.title,
+      author: blog.author,
+      url: blog.url,
+      likes: likes,
+      user: blog.user.id
+    }
+    props.likeBlog(id, changedBlog)
   }
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
+  const removeBlog = async (id) => {
+    const removedBlog = blogs.find(blog => blog.id === id)
+    if (window.confirm(`remove blog ${removedBlog.title} by ${removedBlog.author}`)) {
+      try {
+        await blogService.removeBlog(id)
 
+      } catch (exception) {
+        props.setNotification({text: exception.response.data.error, type: 'error'})
+
+      }
+    }
+  }
   return (
-    <div style={blogStyle} className="blog">
-      <div onClick={ toggleVisibility } className="blogTitle">
-        {blog.title} {blog.author}
-      </div>
-      <div style={showWhenVisible} className="togglableContent">
-        {blog.likes} likes <button onClick={likes}>like</button>
-        <br/>
-        {blog.url}
-        <br/>
-          added by {blog.user.name}
-        <br/>
-        {user.username === blog.user.username ?
-         <button onClick={remove}>remove</button>
-        : ''}
-      </div>
+    <div>
+      <h2>{currentBlog.title} {currentBlog.author}</h2>
+      <p>{currentBlog.url} </p>
+      {currentBlog.likes} likes <button onClick={()=>likeBlog(currentBlog.id)}>like</button>
+      <p>Added by {props.loginUser.name}</p>
     </div>
   )
 }
-Blog.propTypes = {
-  blog: PropTypes.object.isRequired,
-  likes: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+const mapDispatchToProps = {
+   likeBlog
 }
-
-export default Blog
+const mapStateToProps = (state) => {
+  return {
+    blogs: state.blogs,
+    loginUser: state.loginUser
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Blog)

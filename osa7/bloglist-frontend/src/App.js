@@ -15,8 +15,8 @@ import {
 import UserList from "./components/UserList"
 import BlogList from "./components/BlogList"
 import User from './components/User'
-import Togglable from "./components/Togglable";
-import BlogForm from "./components/BlogForm";
+import Blog from './components/Blog'
+
 const App = (props) => {
 
   useEffect(() => {
@@ -44,14 +44,17 @@ const App = (props) => {
     console.log("user id: ", id)
     return props.users.find(user => user.id === id)
   }
-
+  const blogById = (id) => {
+    console.log("blog id: ", id)
+    return props.blogs.find(blog => blog.id === id)
+  }
   return (
       <div>
         <h2>Blogs</h2>
         <Notification/>
-        {props.loggedUser !== null ?
+        {props.loginUser !== null ||  props.loginUser === undefined ?
             <div>
-              <p>{props.loggedUser.name} logged in</p>
+              <p>{props.loginUser.name} logged in</p>
                 <button onClick={() => handleLogout()}>
                   logout
                 </button>
@@ -60,10 +63,16 @@ const App = (props) => {
         <Router>
           <div>
             <Route exact path="/" render={() =>
+                 <BlogList />
+            } />
+            <Route exact path="/blogs" render={() =>
                 <BlogList />
             } />
+            <Route exact path="/blogs/:id" render={({ match }) =>
+                <Blog blog={ blogById(match.params.id) }/>
+            } />
             <Route exact path="/users" render={() =>
-                props.loggedUser ? <UserList /> : <Redirect to="/login" />
+                props.loginUser ? <UserList /> : <Redirect to="/login" />
             } />
             <Route exact path="/users/:id" render={({ match }) =>
                 <User user={userById(match.params.id)} />
@@ -82,8 +91,9 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state) => {
   return {
-    loggedUser: state.loginUser,
-    users: state.users
+    loginUser: state.loginUser,
+    users: state.users,
+    blogs: state.blogs
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
