@@ -33,7 +33,7 @@ const App = (props) => {
     }
   }, [])
 
-
+  const padding = { padding: 5 }
   const handleLogout = () => {
     window.localStorage.removeItem(
         'loggedUser'
@@ -50,18 +50,20 @@ const App = (props) => {
   }
   return (
       <div>
-        <h2>Blogs</h2>
-        <Notification/>
-        {props.loginUser !== null ||  props.loginUser === undefined ?
-            <div>
-              <p>{props.loginUser.name} logged in</p>
-                <button onClick={() => handleLogout()}>
-                  logout
-                </button>
-            </div>:<></>
-        }
+
         <Router>
           <div>
+            <div>
+              <Link style={padding} to="/">blogs</Link>
+              <Link style={padding} to="/users">users</Link>
+              {props.loginUser
+                  ? <em>{props.loginUser.name} logged in  <button onClick={handleLogout}> logout </button></em>
+                  : <Link to="/login">login</Link>
+              }
+            </div>
+            <h2>Blogs</h2>
+            <Notification/>
+
             <Route exact path="/" render={() =>
                  <BlogList />
             } />
