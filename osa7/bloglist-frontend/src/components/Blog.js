@@ -34,12 +34,18 @@ const Blog = ( props ) => {
       }
     }
   }
+  const comments = currentBlog.comments.map((comment, index) => {
+    console.log('comment', comment)
+    return (<li key={index}>{comment.comment} </li>)
+  })
   return (
     <div>
       <h2>{currentBlog.title} {currentBlog.author}</h2>
-      <p>{currentBlog.url} </p>
+      {currentBlog.url}
       {currentBlog.likes} likes <button onClick={()=>likeBlog(currentBlog.id)}>like</button>
       <p>Added by {props.loginUser.name}</p>
+      <h3>Comments</h3>
+      <ul>{comments}</ul>
     </div>
   )
 }
