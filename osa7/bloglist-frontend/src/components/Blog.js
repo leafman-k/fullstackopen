@@ -3,9 +3,12 @@ import React from 'react'
 import blogService from '../services/blogs'
 import {connect} from 'react-redux'
 import { likeBlog } from '../reducers/blogReducer'
+import CommentForm from './CommentForm'
 
 const Blog = ( props ) => {
-
+  if ( props.blog === undefined) {
+    return null
+  }
   const currentBlog = props.blog
   const blogs = props.blogs
 
@@ -41,10 +44,11 @@ const Blog = ( props ) => {
   return (
     <div>
       <h2>{currentBlog.title} {currentBlog.author}</h2>
-      {currentBlog.url}
+      <p>{currentBlog.url}</p>
       {currentBlog.likes} likes <button onClick={()=>likeBlog(currentBlog.id)}>like</button>
       <p>Added by {props.loginUser.name}</p>
       <h3>Comments</h3>
+      <CommentForm id={currentBlog.id}/>
       <ul>{comments}</ul>
     </div>
   )
