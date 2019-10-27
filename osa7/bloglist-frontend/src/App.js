@@ -1,24 +1,24 @@
-import React, {useEffect} from 'react'
-import {connect} from 'react-redux'
-import {setNotification} from "./reducers/notificationReducer";
+/*eslint no-unused-vars:0*/
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 
-import {getAllBlogs} from "./reducers/blogReducer";
-import {setUser} from './reducers/loginReducer'
+import { getAllBlogs } from './reducers/blogReducer'
+import { setUser } from './reducers/loginReducer'
 
 import {
   BrowserRouter as Router,
   Route, Link, Redirect
 } from 'react-router-dom'
-import UserList from "./components/UserList"
-import BlogList from "./components/BlogList"
+import UserList from './components/UserList'
+import BlogList from './components/BlogList'
 import User from './components/User'
 import Blog from './components/Blog'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import Form from 'react-bootstrap/Form'
 
 const App = (props) => {
 
@@ -39,69 +39,69 @@ const App = (props) => {
   const padding = { padding: 5 }
   const handleLogout = () => {
     window.localStorage.removeItem(
-        'loggedUser'
+      'loggedUser'
     )
     props.setUser(null)
   }
   const userById = (id) => {
-    console.log("user id: ", id)
+    console.log('user id: ', id)
     return props.users.find(user => user.id === id)
   }
   const blogById = (id) => {
-    console.log("blog id: ", id)
+    console.log('blog id: ', id)
     return props.blogs.find(blog => blog.id === id)
   }
   return (
-      <div className="container">
+    <div className="container">
 
-        <Router>
-          <div>
-            <Navbar collapseOnSelect expand="lg" bg="light" variant="primary">
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="mr-auto">
-                  <Nav.Link href="#" as="span">
-                    <Link style={padding} to="/">Blogs</Link>
-                  </Nav.Link>
-                  <Nav.Link href="#" as="span">
-                    <Link style={padding} to="/users">Users</Link>
-                  </Nav.Link>
-                  <Nav.Link href="#" as="span">
-                    {props.loginUser
-                        ? <em>{props.loginUser.name} logged in
-                          <button onClick={handleLogout} className="btn btn-primary btn-sm left-buffer "> logout </button></em>
-                        : <Link to="/login">Login</Link>
-                    }
-                  </Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-            <div className="jumbotron">
-              <h2>Blogs</h2>
-            </div>
-              <Notification/>
-
-            <Route exact path="/" render={() =>
-                 <BlogList />
-            } />
-            <Route exact path="/blogs" render={() =>
-                <BlogList />
-            } />
-            <Route exact path="/blogs/:id" render={({ match }) =>
-                <Blog blog={ blogById(match.params.id) }/>
-            } />
-            <Route exact path="/users" render={() =>
-                props.loginUser ? <UserList /> : <Redirect to="/login" />
-            } />
-            <Route exact path="/users/:id" render={({ match }) =>
-                <User user={userById(match.params.id)} />
-            } />
-            <Route path="/login" render={() =>
-                <LoginForm />
-            } />
+      <Router>
+        <div>
+          <Navbar collapseOnSelect expand="lg" bg="light" variant="primary">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="#" as="span">
+                  <Link style={padding} to="/">Blogs</Link>
+                </Nav.Link>
+                <Nav.Link href="#" as="span">
+                  <Link style={padding} to="/users">Users</Link>
+                </Nav.Link>
+                <Nav.Link href="#" as="span">
+                  {props.loginUser
+                    ? <em>{props.loginUser.name} logged in
+                      <button onClick={handleLogout} className="btn btn-primary btn-sm left-buffer "> logout </button></em>
+                    : <Link to="/login">Login</Link>
+                  }
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <div className="jumbotron">
+            <h2>Blogs</h2>
           </div>
-        </Router>
-      </div>
+          <Notification/>
+
+          <Route exact path="/" render={() =>
+            <BlogList />
+          } />
+          <Route exact path="/blogs" render={() =>
+            <BlogList />
+          } />
+          <Route exact path="/blogs/:id" render={({ match }) =>
+            <Blog blog={ blogById(match.params.id) }/>
+          } />
+          <Route exact path="/users" render={() =>
+            props.loginUser ? <UserList /> : <Redirect to="/login" />
+          } />
+          <Route exact path="/users/:id" render={({ match }) =>
+            <User user={userById(match.params.id)} />
+          } />
+          <Route path="/login" render={() =>
+            <LoginForm />
+          } />
+        </div>
+      </Router>
+    </div>
   )
 }
 

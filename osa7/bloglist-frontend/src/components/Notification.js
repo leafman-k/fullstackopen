@@ -1,11 +1,11 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Alert from 'react-bootstrap/Alert'
 
 const Notification = (props) => {
 
   return (
-      <div>
+    <div>
       {
         props.notification.content &&
             <Alert variant={props.notification.type}>
@@ -13,7 +13,7 @@ const Notification = (props) => {
             </Alert>
 
       }
-      </div>
+    </div>
   )
 }
 const mapStateToProps = (state) => {

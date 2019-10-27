@@ -1,7 +1,6 @@
 import React from 'react'
 
-import blogService from '../services/blogs'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { likeBlog,removeBlog } from '../reducers/blogReducer'
 import CommentForm from './CommentForm'
 
@@ -32,7 +31,7 @@ const Blog = ( props ) => {
         await props.removeBlog(id)
 
       } catch (exception) {
-        props.setNotification({text: exception.response.data.error, type: 'error'})
+        props.setNotification({ text: exception.response.data.error, type: 'error' })
 
       }
     }
@@ -45,7 +44,7 @@ const Blog = ( props ) => {
     <div>
       <h2>{currentBlog.title} {currentBlog.author}</h2>
       <p>{currentBlog.url}</p>
-      {currentBlog.likes} likes <button onClick={()=>likeBlog(currentBlog.id)} className="btn btn-success btn-sm">like</button>
+      {currentBlog.likes} likes <button onClick={() => likeBlog(currentBlog.id)} className="btn btn-success btn-sm">like</button>
       <p>Added by {currentBlog.user.name}</p>
       { props.loginUser && props.loginUser.username === currentBlog.user.username &&
         <button onClick={() => removeBlog(currentBlog.id)} className="btn btn-danger top-buffer">Remove the
@@ -58,7 +57,7 @@ const Blog = ( props ) => {
   )
 }
 const mapDispatchToProps = {
-   likeBlog, removeBlog
+  likeBlog, removeBlog
 }
 const mapStateToProps = (state) => {
   return {

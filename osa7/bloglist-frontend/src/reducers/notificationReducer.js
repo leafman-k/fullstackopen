@@ -4,12 +4,12 @@ const notificationReducer = (state = '', action) => {
   console.log('notification state now: ', state)
   console.log('notificationReducer action', action)
   switch(action.type){
-    case 'NEW_NOTIFICATION':
-      return action.data
-    case 'RESET':
-      return ''
-    default:
-      return state
+  case 'NEW_NOTIFICATION':
+    return action.data
+  case 'RESET':
+    return ''
+  default:
+    return state
   }
 }
 

@@ -5,10 +5,10 @@ const userReducer = (state = [], action) => {
   console.log('users state now: ', state)
   console.log('users action', action)
   switch(action.type){
-    case 'INIT_USERS':
-      return action.data
-    default:
-      return state
+  case 'INIT_USERS':
+    return action.data
+  default:
+    return state
   }
 }
 export const getAllUsers = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import {useField} from '../hooks'
-import {connect} from "react-redux";
-import {commentBlog} from '../reducers/blogReducer'
+import { useField } from '../hooks'
+import { connect } from 'react-redux'
+import { commentBlog } from '../reducers/blogReducer'
 
 
 const CommentForm = (props) => {
@@ -17,20 +17,20 @@ const CommentForm = (props) => {
   }
   return (
 
-      <form onSubmit={commentBlog}>
-        <div className="form-group">
-          <label htmlFor="Comment">Comment</label>
-          <input
-              type="text"
-              value={comment.value}
-              name="Comment"
-              onChange={comment.onChange}
-              className="form-control"
-          />
-        </div>
-        <button type="submit" className="btn btn-secondary">Add new comment</button>
-      </form>
+    <form onSubmit={commentBlog}>
+      <div className="form-group">
+        <label htmlFor="Comment">Comment</label>
+        <input
+          type="text"
+          value={comment.value}
+          name="Comment"
+          onChange={comment.onChange}
+          className="form-control"
+        />
+      </div>
+      <button type="submit" className="btn btn-secondary">Add new comment</button>
+    </form>
   )
 }
 
-export default connect(null, {commentBlog})(CommentForm)
+export default connect(null, { commentBlog })(CommentForm)

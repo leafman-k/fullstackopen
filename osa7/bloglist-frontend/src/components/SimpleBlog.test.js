@@ -1,9 +1,11 @@
+/*eslint no-unused-vars:0*/
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'
 import SimpleBlog from './SimpleBlog'
 
+/*eslint no-undef:0*/
 afterEach(cleanup)
 
 describe('<SimbleBlog/>', () => {

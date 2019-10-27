@@ -1,8 +1,8 @@
 import React from 'react'
-import {useField} from '../hooks'
-import {connect} from "react-redux";
-import {setNotification} from "../reducers/notificationReducer";
-import {addBlog} from '../reducers/blogReducer'
+import { useField } from '../hooks'
+import { connect } from 'react-redux'
+import { setNotification } from '../reducers/notificationReducer'
+import { addBlog } from '../reducers/blogReducer'
 
 
 const BlogForm = (props) => {
@@ -17,14 +17,14 @@ const BlogForm = (props) => {
         title: title.value, author: author.value, url: url.value
       })
       props.setNotification(
-          {content: `A new blog ${title.value} by ${author.value} added`, type: 'success'}
+        { content: `A new blog ${title.value} by ${author.value} added`, type: 'success' }
       )
       title.reset()
       author.reset()
       url.reset()
 
     } catch (exception) {
-      props.setNotification({content: 'Ooops, Something went wrong', type: 'danger'})
+      props.setNotification({ content: 'Ooops, Something went wrong', type: 'danger' })
 
     }
 
