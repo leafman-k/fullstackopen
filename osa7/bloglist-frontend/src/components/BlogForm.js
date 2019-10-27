@@ -17,48 +17,51 @@ const BlogForm = (props) => {
         title: title.value, author: author.value, url: url.value
       })
       props.setNotification(
-          {content: `A new blog ${title.value} by ${author.value} added`, type: 'info'}
+          {content: `A new blog ${title.value} by ${author.value} added`, type: 'success'}
       )
       title.reset()
       author.reset()
       url.reset()
 
     } catch (exception) {
-      props.setNotification({content: 'Ooops, Something went wrong', type: 'error'})
+      props.setNotification({content: 'Ooops, Something went wrong', type: 'danger'})
 
     }
 
   }
   return (
     <form onSubmit={addBlog}>
-      <div>
-          title:
+      <div className="form-group">
+        <label htmlFor="Title">Title</label>
         <input
           type="text"
           value={title.value}
           name="Title"
           onChange={title.onChange}
+          className="form-control"
         />
       </div>
-      <div>
-          author:
+      <div className="form-group">
+        <label htmlFor="Author">Author</label>
         <input
           type="text"
           value={author.value}
           name="Author"
           onChange={author.onChange}
+          className="form-control"
         />
       </div>
-      <div>
-          url:
+      <div className="form-group">
+        <label htmlFor="Url">url</label>
         <input
           type="text"
           value={url.value}
           name="Url"
           onChange={url.onChange}
+          className="form-control"
         />
       </div>
-      <button type="submit">Add new blog</button>
+      <button type="submit" className="btn btn-primary">Add new blog</button>
     </form>
   )
 }

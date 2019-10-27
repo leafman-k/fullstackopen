@@ -1,5 +1,5 @@
 
-const loginReducer = (state = {}, action) => {
+const loginReducer = (state = null, action) => {
 
   console.log('notification state now: ', state)
   console.log('notificationReducer action', action)

@@ -18,16 +18,17 @@ const CommentForm = (props) => {
   return (
 
       <form onSubmit={commentBlog}>
-        <div>
-          comment:
+        <div className="form-group">
+          <label htmlFor="Comment">Comment</label>
           <input
               type="text"
               value={comment.value}
               name="Comment"
               onChange={comment.onChange}
+              className="form-control"
           />
         </div>
-        <button type="submit">Add new comment</button>
+        <button type="submit" className="btn btn-secondary">Add new comment</button>
       </form>
   )
 }

@@ -28,30 +28,32 @@ const LoginNoHistory = (props) => {
       password.reset()
       props.history.push('/users')
     } catch (exception) {
-      props.setNotification({ content:'wrong credentials', type:'error' })
+      props.setNotification({ content:'wrong credentials', type:'danger' })
     }
   }
   return (
       <form onSubmit={handleLogin}>
-        <div>
-          username
+        <div className="form-group">
+          <label htmlFor="Username">Username</label>
           <input
               type={username.type}
               value={username.value}
               name="Username"
               onChange={username.onChange}
+              className="form-control"
           />
         </div>
-        <div>
-          password
+        <div className="form-group">
+          <label htmlFor="Password">password</label>
           <input
               type={password.type}
               value={password.value}
               name="Password"
               onChange={password.onChange}
+              className="form-control"
           />
         </div>
-        <button type="submit">login</button>
+        <button type="submit" className="btn btn-primary">login</button>
       </form>
   )
 }

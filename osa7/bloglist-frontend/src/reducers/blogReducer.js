@@ -73,5 +73,14 @@ export const commentBlog = (id, comment) => {
     })
   }
 }
+export const removeBlog = (id) => {
 
+  return async dispatch => {
+    await blogService.removeBlog(id)
+    dispatch({
+      type: 'REMOVE_BLOG',
+      data: {id: id}
+    })
+  }
+}
 export default blogReducer

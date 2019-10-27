@@ -1,27 +1,37 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {Table} from 'react-bootstrap'
+import {connect} from 'react-redux'
 import BlogListItem from './BlogListItem'
-import blogService from '../services/blogs'
-import {addBlog, getAllBlogs, likeBlog} from '../reducers/blogReducer'
+import {addBlog, likeBlog} from '../reducers/blogReducer'
 import {setNotification} from '../reducers/notificationReducer'
 import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 
-
 const BlogList = (props) => {
   const blogs = props.blogs
 
-
-
   return (
       <div>
-        {props.loginUser ? <Togglable buttonLabel='new blog'>
-          <BlogForm />
-        </Togglable> : <></>}
-
-        {blogs.map(blog =>
-            <BlogListItem key={blog.id} blog={blog}/>
-        )}
+        <div className="row">
+          <div className="col">
+            {props.loginUser ? <Togglable buttonLabel='new blog'>
+              <BlogForm/>
+            </Togglable> : <></>}
+          </div>
+        </div>
+        <div className="row top-buffer">
+          <div className="col">
+            <Table striped>
+              <tbody>
+              {blogs.map(blog =>
+                  <tr key={blog.id}>
+                    <BlogListItem key={blog.id} blog={blog}/>
+                  </tr>
+              )}
+              </tbody>
+            </Table>
+          </div>
+        </div>
       </div>
   )
 }
@@ -34,7 +44,7 @@ const mapStateToProps = (state) => {
     loginUser: state.loginUser
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(BlogList)
+export default connect(mapStateToProps, mapDispatchToProps)(BlogList)
 
 
 

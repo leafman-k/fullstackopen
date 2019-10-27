@@ -10,12 +10,15 @@ import {setUser} from './reducers/loginReducer'
 
 import {
   BrowserRouter as Router,
-  Route, Link, Redirect, withRouter
+  Route, Link, Redirect
 } from 'react-router-dom'
 import UserList from "./components/UserList"
 import BlogList from "./components/BlogList"
 import User from './components/User'
 import Blog from './components/Blog'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import Form from 'react-bootstrap/Form'
 
 const App = (props) => {
 
@@ -49,20 +52,34 @@ const App = (props) => {
     return props.blogs.find(blog => blog.id === id)
   }
   return (
-      <div>
+      <div className="container">
 
         <Router>
           <div>
-            <div>
-              <Link style={padding} to="/">blogs</Link>
-              <Link style={padding} to="/users">users</Link>
-              {props.loginUser
-                  ? <em>{props.loginUser.name} logged in  <button onClick={handleLogout}> logout </button></em>
-                  : <Link to="/login">login</Link>
-              }
+            <Navbar collapseOnSelect expand="lg" bg="light" variant="primary">
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link href="#" as="span">
+                    <Link style={padding} to="/">Blogs</Link>
+                  </Nav.Link>
+                  <Nav.Link href="#" as="span">
+                    <Link style={padding} to="/users">Users</Link>
+                  </Nav.Link>
+                  <Nav.Link href="#" as="span">
+                    {props.loginUser
+                        ? <em>{props.loginUser.name} logged in
+                          <button onClick={handleLogout} className="btn btn-primary btn-sm left-buffer "> logout </button></em>
+                        : <Link to="/login">Login</Link>
+                    }
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+            <div className="jumbotron">
+              <h2>Blogs</h2>
             </div>
-            <h2>Blogs</h2>
-            <Notification/>
+              <Notification/>
 
             <Route exact path="/" render={() =>
                  <BlogList />

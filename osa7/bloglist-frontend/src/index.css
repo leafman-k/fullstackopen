@@ -43,3 +43,5 @@ li {
     padding: 10px;
     margin-bottom: 10px;
 }
+.top-buffer { margin-top:20px; }
+.left-buffer { margin-left:5px; }

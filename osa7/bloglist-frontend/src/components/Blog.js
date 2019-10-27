@@ -2,7 +2,7 @@ import React from 'react'
 
 import blogService from '../services/blogs'
 import {connect} from 'react-redux'
-import { likeBlog } from '../reducers/blogReducer'
+import { likeBlog,removeBlog } from '../reducers/blogReducer'
 import CommentForm from './CommentForm'
 
 const Blog = ( props ) => {
@@ -29,7 +29,7 @@ const Blog = ( props ) => {
     const removedBlog = blogs.find(blog => blog.id === id)
     if (window.confirm(`remove blog ${removedBlog.title} by ${removedBlog.author}`)) {
       try {
-        await blogService.removeBlog(id)
+        await props.removeBlog(id)
 
       } catch (exception) {
         props.setNotification({text: exception.response.data.error, type: 'error'})
@@ -39,22 +39,26 @@ const Blog = ( props ) => {
   }
   const comments = currentBlog.comments.map((comment, index) => {
     console.log('comment', comment)
-    return (<li key={index}>{comment.comment} </li>)
+    return (<li key={index} className="list-group-item">{comment.comment} </li>)
   })
   return (
     <div>
       <h2>{currentBlog.title} {currentBlog.author}</h2>
       <p>{currentBlog.url}</p>
-      {currentBlog.likes} likes <button onClick={()=>likeBlog(currentBlog.id)}>like</button>
-      <p>Added by {props.loginUser.name}</p>
+      {currentBlog.likes} likes <button onClick={()=>likeBlog(currentBlog.id)} className="btn btn-success btn-sm">like</button>
+      <p>Added by {currentBlog.user.name}</p>
+      { props.loginUser && props.loginUser.username === currentBlog.user.username &&
+        <button onClick={() => removeBlog(currentBlog.id)} className="btn btn-danger top-buffer">Remove the
+          blog</button>
+      }
       <h3>Comments</h3>
       <CommentForm id={currentBlog.id}/>
-      <ul>{comments}</ul>
+      <ul className="list-group top-buffer">{comments}</ul>
     </div>
   )
 }
 const mapDispatchToProps = {
-   likeBlog
+   likeBlog, removeBlog
 }
 const mapStateToProps = (state) => {
   return {
