@@ -52,7 +52,7 @@ const BlogForm = (props) => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="Url">url</label>
+        <label htmlFor="Url">Url</label>
         <input
           type="text"
           value={url.value}

@@ -61,16 +61,16 @@ const App = (props) => {
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="#" as="span">
-                  <Link style={padding} to="/">Blogs</Link>
+                  <Link style={padding} to="/blogs" data-cy-id="bloglink">Blogs</Link>
                 </Nav.Link>
                 <Nav.Link href="#" as="span">
-                  <Link style={padding} to="/users">Users</Link>
+                  <Link style={padding} to="/users" data-cy-id="userlink">Users</Link>
                 </Nav.Link>
                 <Nav.Link href="#" as="span">
                   {props.loginUser
                     ? <em>{props.loginUser.name} logged in
                       <button onClick={handleLogout} className="btn btn-primary btn-sm left-buffer "> logout </button></em>
-                    : <Link to="/login">Login</Link>
+                    : <Link to="/login" data-cy-id="loginlink">Login</Link>
                   }
                 </Nav.Link>
               </Nav>
