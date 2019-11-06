@@ -1,29 +1,36 @@
 import React, {useState} from 'react'
-
+import Select from 'react-select'
 
 const AuthorForm = (props) => {
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
 
-
+  const options = props.authors.map(author => {
+    return {value: author.name, label: author.name}
+  })
 
   const submit = async (e) => {
     e.preventDefault()
     await props.editAuthor({
-      variables: { name, born: parseInt(born, 10) }
+      variables: { name: name.value, born: parseInt(born, 10) }
     })
 
     setName('')
     setBorn('')
   }
-
+  const handleChange = selectedOption => {
+    setName(selectedOption)
+  }
+  const paddingTop = {marginTop:20, marginBottom: 20}
   return (
-      <div>
+      <div >
         <form onSubmit={submit}>
-          <div>
-            name <input
+          <div style={paddingTop}>
+          <Select
               value={name}
-              onChange={({ target }) => setName(target.value)}
+              onChange={handleChange}
+              options={options}
+
           />
           </div>
           <div>
