@@ -96,7 +96,7 @@ const typeDefs = gql`
   }
   type Author {
     name: String!
-    born: Int!
+    born: Int
     id: ID!
     bookCount: Int!
   }
@@ -156,12 +156,13 @@ const resolvers = {
       return book
     },
     editAuthor: (root, args) => {
+      console.log("Author to be updated:", args)
       const author = authors.find(auth => auth.name === args.name)
       if(!author){
        return null
       }
       const updatedAuthor = {...author, born: args.setBornTo}
-      authors = authors.concat(updatedAuthor)
+      authors = authors.map(a => a.name === args.name ? updatedAuthor : a)
       return updatedAuthor
     }
   }

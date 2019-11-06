@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Books = ({show, result}) => {
-  if ( !show || result.data.allBooks == null ) {
+  if ( !show || result.loading ) {
     return null
   }
 

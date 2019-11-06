@@ -1,9 +1,10 @@
 import React from 'react'
+import AuthorForm from './AuthorForm'
 
 
-const Authors = ({ show, result }) => {
+const Authors = ({ show, result, editAuthor }) => {
 
-  if (!show || result.data.allAuthors == null ) {
+  if (!show || result.loading ) {
     return null
   }
   const authors = result.data.allAuthors
@@ -30,7 +31,7 @@ const Authors = ({ show, result }) => {
           )}
         </tbody>
       </table>
-
+      <AuthorForm editAuthor={editAuthor}/>
     </div>
   )
 }

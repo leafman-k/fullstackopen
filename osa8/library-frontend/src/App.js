@@ -37,7 +37,14 @@ mutation addBook($title: String!, $author: String!, $published: Int!, $genres: [
   }
 }
 `
-
+const EDIT_AGE = gql`
+mutation editAuthor($name: String!, $born: Int!) {
+  editAuthor(name: $name, setBornTo: $born)  {
+    name
+    born
+  }
+}
+`
 
 const App = () => {
   const [page, setPage] = useState('authors')
@@ -46,7 +53,9 @@ const App = () => {
   const [addBook] = useMutation(CREATE_BOOK, {
     refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }]
   })
-
+  const [updateAuthor] = useMutation(EDIT_AGE, {
+    refetchQueries: [{ query: ALL_AUTHORS }]
+  })
   return (
     <div>
       <div>
@@ -56,7 +65,7 @@ const App = () => {
       </div>
 
       <Authors
-        show={page === 'authors'} result={authors}
+        show={page === 'authors'} result={authors} editAuthor={updateAuthor}
       />
 
       <Books

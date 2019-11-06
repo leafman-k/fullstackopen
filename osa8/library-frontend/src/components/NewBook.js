@@ -16,7 +16,7 @@ const NewBook = ({show, addBook}) => {
 
     console.log('add book...')
     await addBook({
-      variables: { title, author, published: parseInt(published), genres }
+      variables: { title, author, published: parseInt(published, 10), genres }
     })
     setTitle('')
     setPublished('')
