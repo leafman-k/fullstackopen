@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
-const NewBook = (props) => {
+const NewBook = ({show, addBook}) => {
   const [title, setTitle] = useState('')
   const [author, setAuhtor] = useState('')
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
 
-  if (!props.show) {
+  if (!show) {
     return null
   }
 
@@ -15,7 +15,9 @@ const NewBook = (props) => {
     e.preventDefault()
 
     console.log('add book...')
-
+    await addBook({
+      variables: { title, author, published: parseInt(published), genres }
+    })
     setTitle('')
     setPublished('')
     setAuhtor('')

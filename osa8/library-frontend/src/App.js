@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {gql} from 'apollo-boost'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
@@ -23,7 +23,19 @@ const ALL_BOOKS = gql`
     genres
   }
 }
-
+`
+const CREATE_BOOK = gql`
+mutation addBook($title: String!, $author: String!, $published: Int!, $genres: [String]) {
+  addBook(
+    title: $title,
+    author: $author,
+    published: $published,
+    genres: $genres
+  ) {
+    title
+    author
+  }
+}
 `
 
 
@@ -31,7 +43,10 @@ const App = () => {
   const [page, setPage] = useState('authors')
   const authors = useQuery(ALL_AUTHORS)
   const books = useQuery(ALL_BOOKS)
-  console.log('Authors: ', authors)
+  const [addBook] = useMutation(CREATE_BOOK, {
+    refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }]
+  })
+
   return (
     <div>
       <div>
@@ -49,7 +64,7 @@ const App = () => {
       />
 
       <NewBook
-        show={page === 'add'}
+        show={page === 'add' } addBook={addBook}
       />
 
     </div>
