@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer, gql, PubSub } = require('apollo-server')
 const {UserInputError, AuthenticationError} = require('apollo-server-errors')
 const uuid = require('uuid/v1')
 const mongoose = require('mongoose')
@@ -8,7 +8,7 @@ const Book = require('./models/book')
 const Author = require('./models/author')
 const User = require('./models/user')
 const config = require('./utils/config')
-
+const pubsub = new PubSub()
 mongoose.set('useFindAndModify', false)
 
 console.log('connecting to', config.MONGODB_URI)
@@ -119,6 +119,9 @@ const typeDefs = gql`
     id: ID!
     bookCount: Int!
   }
+  type Subscription {
+    bookAdded: Book!
+  }
   type User {
     username: String!
     favoriteGenre: String!
@@ -217,6 +220,7 @@ const resolvers = {
           invalidArgs: args,
         })
       }
+      pubsub.publish('BOOK_ADDED', { bookAdded: book })
       return book
     },
     editAuthor: async (root, args, context) => {
@@ -266,7 +270,12 @@ const resolvers = {
 
       return { value: jwt.sign(userForToken, JWT_SECRET) }
     }
-  }
+  },
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator(['BOOK_ADDED'])
+    },
+  },
 }
 
 const server = new ApolloServer({
@@ -284,6 +293,7 @@ const server = new ApolloServer({
   }
 })
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
+  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })
