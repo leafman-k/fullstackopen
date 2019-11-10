@@ -19,6 +19,8 @@ const LoginForm = (props) => {
       props.setToken(token)
       localStorage.setItem('bookapp-user-token', token)
     }
+    setPassword('')
+    setUsername('')
   }
 
   return (

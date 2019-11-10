@@ -5,6 +5,7 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
+import Recommendation from './components/Recommendation'
 
 const ALL_AUTHORS = gql`
 {
@@ -15,6 +16,7 @@ const ALL_AUTHORS = gql`
   }
 }
 `
+
 const ALL_BOOKS = gql`
 {
   allBooks {
@@ -58,6 +60,7 @@ const LOGIN = gql`
     }
   }
 `
+
 const App = () => {
   const client = useApolloClient()
   const [page, setPage] = useState('authors')
@@ -84,6 +87,7 @@ const App = () => {
     setToken(null)
     localStorage.clear()
     client.resetStore()
+    setPage('authors')
   }
 
 
@@ -94,6 +98,9 @@ const App = () => {
         <button onClick={() => setPage('books')}>books</button>
         {
           token && <button onClick={() => setPage('add')}>add book</button>
+        }
+        {
+          token && <button onClick={() => setPage('recommendation')}>Recommended</button>
         }
         {
           token && <button onClick={() => logout()}>logout</button>
@@ -109,6 +116,7 @@ const App = () => {
       <Books  show={page === 'books'} result={books} />
       <NewBook show={page === 'add'} addBook={addBook}/>
       <LoginForm show={page === 'login'} login={login} setToken={setToken}/>
+      <Recommendation show={page === 'recommendation'} result={books} />
     </div>
   )
 }

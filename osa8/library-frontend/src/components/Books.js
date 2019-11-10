@@ -34,12 +34,12 @@ const Books = ({show, result}) => {
         <table>
           <tbody>
           <tr>
-            <th></th>
+            <th>Title</th>
             <th>
-              author
+              Author
             </th>
             <th>
-              published
+              Published
             </th>
           </tr>
           {booksToShow.map(a =>
