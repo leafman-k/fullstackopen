@@ -184,14 +184,16 @@ const resolvers = {
     }
   },
   Author: {
-    bookCount: (root) =>{
-      return books.reduce((acc, current) => current.author === root.name ? ++acc : acc ,0)
+    bookCount: async (root) =>{
+      const author = await Author.findOne({name: root.name})
+      const books = await Book.find({author: author._id})
+      return books.length
     }
   },
   Mutation: {
     addBook: async (root, args, context) => {
       const currentUser = context.currentUser
-
+      console.log('Current user', currentUser)
       if (!currentUser) {
         throw new AuthenticationError("Non-authenticated cannot add a book, please authenticate first")
       }
